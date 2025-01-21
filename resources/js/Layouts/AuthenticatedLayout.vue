@@ -1,12 +1,4 @@
 <template>
-    <!--
-      This example requires updating your template:
-
-      ```
-      <html class="h-full bg-white">
-      <body class="h-full">
-      ```
-    -->
     <div>
       <TransitionRoot as="template" :show="sidebarOpen">
         <Dialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
@@ -69,13 +61,21 @@
       </TransitionRoot>
 
       <!-- Static sidebar for desktop -->
+
+
       <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
           <div class="flex h-16 shrink-0 items-center">
-            <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
+            <Link :href="route('dashboard')">
+                <ApplicationLogo class="block h-11 w-auto fill-current text-gray-800" />
+            </Link>
+            <!-- <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> -->
           </div>
           <nav class="flex flex-1 flex-col">
+            <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                Dashboard
+            </NavLink>
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" class="-mx-2 space-y-1">
@@ -145,9 +145,19 @@
                 </MenuButton>
                 <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                   <MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 ring-1 shadow-lg ring-gray-900/5 focus:outline-hidden">
-                    <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                    <!-- <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
                       <a :href="item.href" :class="[active ? 'bg-gray-50 outline-hidden' : '', 'block px-3 py-1 text-sm/6 text-gray-900']">{{ item.name }}</a>
-                    </MenuItem>
+                    </MenuItem> -->
+                    <ResponsiveNavLink :href="route('profile.edit')">
+                                Profile
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                :href="route('logout')"
+                                method="post"
+                                as="button"
+                            >
+                                Log Out
+                            </ResponsiveNavLink>
                   </MenuItems>
                 </transition>
               </Menu>
@@ -166,7 +176,10 @@
 
   <script setup>
   import { ref } from 'vue'
+  import { Link } from '@inertiajs/vue3';
+  import NavLink from '@/Components/NavLink.vue';
   import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+  import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
   import {
     Dialog,
     DialogPanel,
@@ -205,8 +218,8 @@
     { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
   ]
   const userNavigation = [
-    { name: 'Your profile', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Your profile', href: 'profile/edit' },
+    { name: 'Sign out', href: 'logout', method: 'post' },
   ]
 
   const sidebarOpen = ref(false)
