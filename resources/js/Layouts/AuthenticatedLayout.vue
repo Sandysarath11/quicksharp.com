@@ -70,7 +70,6 @@
             <Link :href="route('dashboard')">
                 <ApplicationLogo class="block h-11 w-auto fill-current text-gray-800" />
             </Link>
-            <!-- <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> -->
           </div>
           <nav class="flex flex-1 flex-col">
             <NavLink :href="route('dashboard')" :active="route().current('dashboard')" :icon="HomeIcon">
@@ -79,18 +78,20 @@
             <NavLink :href="route('user')" :active="route().current('user')" :icon="UsersIcon">
                User
             </NavLink>
+            <NavLink :href="route('project')" :active="route().current('project')" :icon="FolderIcon">
+                Projects
+            </NavLink>
+            <!-- <NavLink :href="route('user')" :active="route().current('user')" :icon="CalendarIcon">
+               Calendar
+            </NavLink>
+            <NavLink :href="route('user')" :active="route().current('user')" :icon="DocumentDuplicateIcon">
+                Documents
+            </NavLink>
+            <NavLink :href="route('user')" :active="route().current('user')" :icon="ChartPieIcon">
+                Reports
+            </NavLink> -->
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
-              <li>
-                <ul role="list" class="-mx-2 space-y-1">
-                  <li v-for="item in navigation" :key="item.name">
-                    <a :href="item.href" :class="[item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']">
-                      <component :is="item.icon" :class="[item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600', 'size-6 shrink-0']" aria-hidden="true" />
-                      {{ item.name }}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
+              <!-- <li>
                 <div class="text-xs/6 font-semibold text-gray-400">Your teams</div>
                 <ul role="list" class="-mx-2 mt-2 space-y-1">
                   <li v-for="team in teams" :key="team.name">
@@ -100,7 +101,7 @@
                     </a>
                   </li>
                 </ul>
-              </li>
+              </li> -->
               <li class="mt-auto">
                 <a href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                   <Cog6ToothIcon class="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600" aria-hidden="true" />
