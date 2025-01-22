@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
 
     /* Admin Process */
 
-    Route::get('/users', [AdminController::class,'index'])->name('users');
+    Route::get('/users', [AdminController::class,'index'])->name('user');
 });
 
 require __DIR__.'/auth.php';

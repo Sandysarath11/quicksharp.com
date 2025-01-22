@@ -73,8 +73,11 @@
             <!-- <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> -->
           </div>
           <nav class="flex flex-1 flex-col">
-            <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                Dashboard
+            <NavLink :href="route('dashboard')" :active="route().current('dashboard')" :icon="HomeIcon">
+               Dashboard
+            </NavLink>
+            <NavLink :href="route('user')" :active="route().current('user')" :icon="UsersIcon">
+               User
             </NavLink>
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
               <li>
