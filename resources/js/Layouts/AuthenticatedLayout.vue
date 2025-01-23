@@ -148,21 +148,26 @@
                   </span>
                 </MenuButton>
                 <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                  <MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 ring-1 shadow-lg ring-gray-900/5 focus:outline-hidden">
-                    <!-- <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                      <a :href="item.href" :class="[active ? 'bg-gray-50 outline-hidden' : '', 'block px-3 py-1 text-sm/6 text-gray-900']">{{ item.name }}</a>
-                    </MenuItem> -->
-                    <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
+                    <MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 ring-1 shadow-lg ring-gray-900/5 focus:outline-hidden">
+                        <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                            <template v-if="item.name === 'Sign out'">
+                            <button
+                                @click="logout"
+                                :class="[active ? 'bg-gray-50 outline-hidden' : '', 'block px-3 py-1 text-sm/6 text-gray-900 w-full text-left']"
                             >
-                                Log Out
-                            </ResponsiveNavLink>
-                  </MenuItems>
+                                {{ item.name }}
+                            </button>
+                            </template>
+                            <template v-else>
+                            <a
+                                :href="item.href"
+                                :class="[active ? 'bg-gray-50 outline-hidden' : '', 'block px-3 py-1 text-sm/6 text-gray-900']"
+                            >
+                                {{ item.name }}
+                            </a>
+                            </template>
+                        </MenuItem>
+                    </MenuItems>
                 </transition>
               </Menu>
             </div>
@@ -180,7 +185,7 @@
 
   <script setup>
   import { ref } from 'vue'
-  import { Link } from '@inertiajs/vue3';
+  import { Link, router  } from '@inertiajs/vue3';
   import NavLink from '@/Components/NavLink.vue';
   import ApplicationLogo from '@/Components/ApplicationLogo.vue';
   import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
@@ -222,9 +227,17 @@
     { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
   ]
   const userNavigation = [
-    { name: 'Your profile', href: 'profile/edit' },
-    { name: 'Sign out', href: 'logout', method: 'post' },
-  ]
+  { name: 'Your profile', href: route('profile.edit') },
+  { name: 'Sign out', href: route('logout') },
+    ]
 
   const sidebarOpen = ref(false)
+
+  const logout = () => {
+  router.post(route('logout'), {}, {
+    onFinish: () => {
+      window.location.reload(); // Force a page reload
+    },
+  });
+};
   </script>
