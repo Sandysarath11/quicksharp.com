@@ -21,4 +21,9 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard/project');
     }
+
+    public function Settings()
+    {
+        return Inertia::render('Dashboard/settings');
+    }
 }

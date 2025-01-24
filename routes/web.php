@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::get('/users', [DashboardController::class,'user'])->name('user');
     Route::get('/projects', [DashboardController::class,'project'])->name('project');
+    Route::get('/settings',[DashboardController::class,'settings'])->name('settings');
 });
 
 require __DIR__.'/auth.php';
