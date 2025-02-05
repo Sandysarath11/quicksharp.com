@@ -18,8 +18,8 @@ const props = defineProps({
 
 const classes = computed(() =>
     props.active
-        ? 'bg-gray-50 text-indigo-600'
-        : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600','group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
+        ? 'bg-gray-100 text-black'
+        : 'text-gray-700 hover:bg-gray-100 hover:text-black','group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
 );
 const iconClasses = 'w-6 h-6';
 </script>
